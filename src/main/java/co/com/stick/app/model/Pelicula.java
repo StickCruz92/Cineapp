@@ -16,15 +16,17 @@ public class Pelicula {
 
 	private int id;
 	private String titulo;
-	private int duracion;
+	private int duracion = 100;
 	private String clasificacion;
 	private String genero;
 	private String imagen = "cinema.png";
 	private Date fechaEstreno;
 	private String estatus = "Activa";
 	
+	private Detalle detalle;
+	
 	public Pelicula() {
-		super();
+		System.out.println("Iniciando el constructor de la clace Pelicula");
 	}
 	
 	public Pelicula(int id, String titulo, int duracion, String clasificacion, String genero, String imagen,
@@ -39,13 +41,15 @@ public class Pelicula {
 		this.fechaEstreno = fechaEstreno;
 		this.estatus = estatus;
 	}
+	
 
 	@Override
 	public String toString() {
 		return "Pelicula [id=" + id + ", titulo=" + titulo + ", duracion=" + duracion + ", clasificacion="
 				+ clasificacion + ", genero=" + genero + ", imagen=" + imagen + ", fechaEstreno=" + fechaEstreno
-				+ ", estatus=" + estatus + "]";
-	}	
-
+				+ ", estatus=" + estatus + ", detalle=" + detalle + "]";
+	}
+	
+	
 	
 }
