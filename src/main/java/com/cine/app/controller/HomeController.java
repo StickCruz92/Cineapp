@@ -89,7 +89,7 @@ public class HomeController {
 		model.addAttribute("horarios", horarios);
 		model.addAttribute("fechaBusqueda", dateFormat.format(fecha));
 		model.addAttribute("pelicula", servicePeliculas.buscarPorId(idPelicula));
-		model.addAttribute("generos", servicePeliculas.buscarGeneros());
+		model.addAttribute("generos", servicePeliculas.buscarTodosGeneros());
 		// TODO - Buscar en la base de datos los horarios.		
 		
 		return "detalle";
