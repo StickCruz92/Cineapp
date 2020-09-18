@@ -49,6 +49,26 @@ public class PeliculasController {
 		return "peliculas/listPeliculas";
 	}
 	
+	/**
+	 * Metodo que muestra la lista de peliculas con paginacion
+	 * @param model
+	 * @param page
+	 * @return
+	 */
+	@GetMapping(value = "/indexPaginate")
+	public String mostrarIndexPaginado(Model model, Pageable page) {
+		Page<Pelicula> lista = servicePeliculas.buscarTodas(page);
+		model.addAttribute("peliculas", lista);
+		
+		model.addAttribute("number", lista.getNumber());
+		model.addAttribute("totalPages", lista.getTotalPages());
+		model.addAttribute("totalElements", lista.getTotalElements());
+		model.addAttribute("size", lista.getSize());
+		model.addAttribute("data",lista.getContent());
+        
+		return "peliculas/listaPeliculas";
+	}
+	
 	@GetMapping("/create")
 	public String crear(@ModelAttribute Pelicula pelicula, Model model) {
 		//model.addAttribute("generos", servicePeliculas.buscarGeneros());
@@ -101,19 +121,7 @@ public class PeliculasController {
 		return "redirect:/peliculas/index";
 	}
 	
-	/**
-	 * Metodo que muestra la lista de peliculas con paginacion
-	 * @param model
-	 * @param page
-	 * @return
-	 */
-	@GetMapping(value = "/indexPaginate")
-	public String mostrarIndexPaginado(Model model, Pageable page) 
-	{
-		Page<Pelicula> lista = servicePeliculas.buscarTodas(page);
-		model.addAttribute("peliculas", lista);
-		return "peliculas/listPeliculas";
-	}
+
 
 	/**
 	 * Agregamos al Model la lista de Generos: De esta forma nos evitamos agregarlos en los metodos

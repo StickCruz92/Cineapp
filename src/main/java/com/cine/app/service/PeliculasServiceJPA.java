@@ -64,8 +64,7 @@ public class PeliculasServiceJPA implements IPeliculasService{
 	}
 
 	@Override
-	public Page<Pelicula> buscarTodas(Pageable page) 
-	{
+	public Page<Pelicula> buscarTodas(Pageable page) {
 		return peliculasRepo.findAll(page);
 	}
 	
