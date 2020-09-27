@@ -1,7 +1,6 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://www.springframework.org/security/tags"
-	prefix="sec"%>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 
 <spring:url value="/" var="urlRoot" />
 <!-- Fixed navbar -->
@@ -21,8 +20,7 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="${urlRoot}peliculas/indexPaginate?page=0">Peliculas
-							lis</a></li>
+					<!--<li><a href="${urlRoot}peliculas/indexPaginate?page=1">Peliculas lis</a></li>-->
 					<li><a href="${urlRoot}about">Acerca</a></li>
 					<li><a href="${urlRoot}formLogin">Login</a></li>
 				</ul>
@@ -43,8 +41,8 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="${urlRoot}peliculas/index">Peliculas</a></li>
-					<li><a href="${urlRoot}horarios/index">Horarios</a></li>
+					<li><a href="${urlRoot}peliculas/indexPaginate?page=1">Peliculas</a></li>
+					<li><a href="${urlRoot}horarios/indexPaginate?page=1">Horarios</a></li>
 					<li><a href="${urlRoot}noticias/index">Noticias</a></li>
 					<li><a href="${urlRoot}admin/logout">Salir</a></li>
 				</ul>
@@ -65,8 +63,8 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="${urlRoot}peliculas/index">Peliculas</a></li>
-					<li><a href="${urlRoot}horarios/index">Horarios</a></li>
+					<li><a href="${urlRoot}peliculas/indexPaginate?page=1">Peliculas</a></li>
+					<li><a href="${urlRoot}horarios/indexPaginate?page=1">Horarios</a></li>
 					<li><a href="${urlRoot}noticias/index">Noticias</a></li>
 					<li><a href="${urlRoot}usuarios/index">Usuarios</a></li>
 					<li><a href="${urlRoot}banners/index">Banner</a></li>

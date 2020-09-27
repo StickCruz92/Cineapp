@@ -43,7 +43,7 @@
 	              <th>Opciones</th>
 	          </tr>
 	
-				<c:forEach var="horario" items="${horarios}">
+				<c:forEach var="horario" items="${horarios.content}">
 					<tr>
 						<td>${horario.pelicula.titulo}</td>
 						<td><fmt:formatDate pattern="dd-MM-yyyy" value="${horario.fecha}" /></td>
@@ -59,6 +59,33 @@
 	
 			</table>
 		</div>
+		
+	   Total Horarios: ${totalElements} - Page ${currentPage} of ${totalPages}
+
+		<nav aria-label="">
+			<ul class="pager">
+				<c:if test="${horarios.number > 0}">
+					<li><a
+						href="${urlHorarios}/indexPaginate?page=${(horarios.number + 1) - 1}">Anterior</a></li>
+				</c:if>
+				<c:forEach begin="1" end="${totalPages}" var="i">
+
+					<c:choose>
+						<c:when test="${i != currentPage}">
+							<a href="${urlHorarios}/indexPaginate?page=${i}">${i}</a>
+						</c:when>
+						<c:otherwise>
+							<span>${i}</span>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+
+				<c:if test="${horarios.number + 1 < totalPages}">
+					<li><a
+						href="${urlHorarios}/indexPaginate?page=${(horarios.number + 1) + 1}">Siguiente</a></li>
+				</c:if>
+			</ul>
+		</nav>
 		
       <hr class="featurette-divider">
 

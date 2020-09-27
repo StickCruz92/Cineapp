@@ -166,5 +166,12 @@ public class PeliculasServiceImpl implements IPeliculasService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+	@Override
+	public Page<Pelicula> buscarTodas(int page, int size) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

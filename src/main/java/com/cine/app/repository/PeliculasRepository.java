@@ -12,4 +12,5 @@ public interface PeliculasRepository extends JpaRepository<Pelicula, Integer> {
 	
 	// Listado de peliculas filtradas por estatus
 	public List<Pelicula> findByEstatus_OrderByTitulo(String estatus);
+	
 }

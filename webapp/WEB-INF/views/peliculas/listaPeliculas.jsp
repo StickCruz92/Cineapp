@@ -44,59 +44,65 @@
 	              <th>Opciones</th>
 	          </tr>
 	
-			   <c:choose>
-			        <c:when test="${data.size() > 0 }">
-			            <c:forEach var="emp" items="${data}">
-			                <tr align="center">
-			                    <td>${pelicula.titulo}</td>
-			                   <c:forEach items="${generos}" var="genero">  
-		                            <c:if test = "${genero.id == pelicula.idGenero}">
-		                            <td>${genero.nombre}</td>
-								   </c:if>
-								</c:forEach>
-			                    <td>${pelicula.clasificacion}</td>
-						        <td>${pelicula.duracion} min.</td>
-						        <td><fmt:formatDate pattern="dd-MM-yyyy"
+				<c:forEach var="pelicula" items="${peliculas.content}">
+					<tr>
+						<td>${pelicula.titulo}</td>
+						<!--<td>${pelicula.idGenero}</td>-->
+						<c:forEach items="${generos}" var="genero">  
+                            <c:if test = "${genero.id == pelicula.idGenero}">
+                            <td>${genero.nombre}</td>
+						   </c:if>
+						</c:forEach>
+						<td>${pelicula.clasificacion}</td>
+						<td>${pelicula.duracion} min.</td>
+						<td><fmt:formatDate pattern="dd-MM-yyyy"
 								value="${pelicula.fechaEstreno}" /></td>
-								<c:choose>
-									<c:when test="${pelicula.estatus eq 'Activa'}">
-										<td><span class="label label-success">${pelicula.estatus}</span></td>
-									</c:when>
-									<c:otherwise>
-										<td><span class="label label-danger">${pelicula.estatus}</span></td>
-									</c:otherwise>
-								</c:choose>
-					            <td>
-									<a href="${urlPeliculas}/edit/${pelicula.id}" class="btn btn-success btn-sm" role="button" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
-									<a href="${urlPeliculas}/delete/${pelicula.id}" onclick='return confirm("¿Estas seguro?")' class="btn btn-danger btn-sm" role="button" title="Eliminar"><span class="glyphicon glyphicon-trash"></span></a>
-								</td>
-			                </tr>
-			            </c:forEach>
-			        </c:when>
-			        <c:otherwise>
-			            <tr align="center">
-			                <td colspan="5">No Users available</td>
-			            </tr>
-			        </c:otherwise>
-			    </c:choose>
+						<c:choose>
+							<c:when test="${pelicula.estatus eq 'Activa'}">
+								<td><span class="label label-success">${pelicula.estatus}</span></td>
+							</c:when>
+							<c:otherwise>
+								<td><span class="label label-danger">${pelicula.estatus}</span></td>
+							</c:otherwise>
+						</c:choose>
+						<td>
+							<a href="${urlPeliculas}/edit/${pelicula.id}" class="btn btn-success btn-sm" role="button" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
+							<a href="${urlPeliculas}/delete/${pelicula.id}" onclick='return confirm("¿Estas seguro?")' class="btn btn-danger btn-sm" role="button" title="Eliminar"><span class="glyphicon glyphicon-trash"></span></a>
+						</td>
+					</tr>
+				</c:forEach>
 			</table>
-			
-			
-			<c:if test="${data.size() > 0 }">
-		        <div class="panel-footer">
-		            Showing ${number+1} of ${size+1} of ${totalElements}
-		            <ul class="pagination">
-		                <c:forEach begin="0" end="${totalPages-1}" var="page">
-		                    <li class="page-item">
-		                        <a href="viewemp?page=${page}&size=${size}" class="page-link">${page+1}</a>
-		                    </li>
-		                </c:forEach>
-		            </ul>
-		        </div>
-		    </c:if>
-			
-			
 		</div>
+		
+		Total Pelculas: ${totalElements} - Page ${currentPage} of ${totalPages}
+		
+		<nav aria-label="">
+		  <ul class="pager">
+		  
+		 <c:if test = "${peliculas.number > 0}">
+		   	   <li><a href="${urlPeliculas}/indexPaginate?page=${(peliculas.number + 1) - 1}">Anterior</a></li>
+		 </c:if>
+		    
+		<c:forEach begin="1" end="${totalPages}" var="i">
+
+		<c:choose>
+	        <c:when test = "${i != currentPage}">
+			   	   <a href="${urlPeliculas}/indexPaginate?page=${i}">${i}</a>
+			</c:when>
+            <c:otherwise>
+                   <span>${i}</span>
+            </c:otherwise>
+         </c:choose>
+	             
+	    </c:forEach>
+	    
+		<c:if test = "${peliculas.number + 1 < totalPages}">
+		<li><a href="${urlPeliculas}/indexPaginate?page=${(peliculas.number + 1) + 1}">Siguiente</a></li>
+		 </c:if>
+		     
+
+		  </ul>
+		</nav>
 
       <hr class="featurette-divider">
 

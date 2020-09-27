@@ -32,6 +32,8 @@ import com.cine.app.util.Utileria;
 @RequestMapping("/peliculas")
 public class PeliculasController {
 	
+	private final int size = 5; 
+	
 	@Autowired
 	private IPeliculasService servicePeliculas;
 	
@@ -43,9 +45,13 @@ public class PeliculasController {
 
 	@GetMapping("/index")
 	public String mostrarIndex(Model model) {
+		int currentPage = 1;
 		List<Pelicula> lista = servicePeliculas.buscarTodas();
 		model.addAttribute("peliculas", lista);
 		model.addAttribute("generos", serviceGeneros.generosActivos());
+
+		model.addAttribute("currentPage", currentPage);	
+		
 		return "peliculas/listPeliculas";
 	}
 	
@@ -56,17 +62,21 @@ public class PeliculasController {
 	 * @return
 	 */
 	@GetMapping(value = "/indexPaginate")
-	public String mostrarIndexPaginado(Model model, Pageable page) {
-		Page<Pelicula> lista = servicePeliculas.buscarTodas(page);
+	public String mostrarIndexPaginado(Model model, @RequestParam int page) {
+				
+		Page<Pelicula> lista = servicePeliculas.buscarTodas(page, size);
 		model.addAttribute("peliculas", lista);
+		model.addAttribute("generos", serviceGeneros.generosActivos());
 		
-		model.addAttribute("number", lista.getNumber());
-		model.addAttribute("totalPages", lista.getTotalPages());
+		model.addAttribute("currentPage", page);		
+		model.addAttribute("number", lista.getNumberOfElements());
 		model.addAttribute("totalElements", lista.getTotalElements());
+		model.addAttribute("totalPages", lista.getTotalPages());
+		
 		model.addAttribute("size", lista.getSize());
 		model.addAttribute("data",lista.getContent());
         
-		return "peliculas/listaPeliculas";
+		return "peliculas/listPeliculas";
 	}
 	
 	@GetMapping("/create")

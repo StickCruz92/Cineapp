@@ -18,6 +18,7 @@ public interface IPeliculasService {
     List<Pelicula> buscarActivas();	
 	List<Pelicula> buscarPorFecha(Date fecha);
 	Page<Pelicula> buscarTodas(Pageable page);	
+	Page<Pelicula> buscarTodas(int page, int size);	
 	void eliminar(int idPelicula);
 	List<Genero> buscarTodosGeneros();
 }

@@ -9,7 +9,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.cine.app.model.Horario;
@@ -58,6 +60,12 @@ public class HorariosServiceJPA implements IHorariosService{
 		if (optional.isPresent())
 			return optional.get();
 		return null;
+	}
+
+	@Override
+	public Page<Horario> buscarTodos(int page, int size) {
+		Pageable pageable = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.DESC, "fecha"));
+		return horariosRepo.findAll(pageable);
 	}
 
 }

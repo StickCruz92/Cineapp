@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cine.app.model.Horario;
@@ -27,6 +28,8 @@ import com.cine.app.service.IPeliculasService;
 @Controller
 @RequestMapping(value="/horarios")
 public class HorariosController {
+	
+	private final int size = 10; 
 	
 	// Inyectamos una instancia desde nuestro Root ApplicationContext
 	@Autowired
@@ -54,8 +57,17 @@ public class HorariosController {
 	 * @return
 	 */
 	@GetMapping(value = "/indexPaginate")
-	public String mostrarIndexPaginado(Model model, Pageable page) {
-		Page<Horario> listaHorarios = serviceHorarios.buscarTodos(page);
+	public String mostrarIndexPaginado(Model model, @RequestParam int page) {
+		Page<Horario> listaHorarios = serviceHorarios.buscarTodos(page, size);
+		
+		model.addAttribute("currentPage", page);		
+		model.addAttribute("number", listaHorarios.getNumberOfElements());
+		model.addAttribute("totalElements", listaHorarios.getTotalElements());
+		model.addAttribute("totalPages", listaHorarios.getTotalPages());
+		
+		model.addAttribute("size", listaHorarios.getSize());
+		model.addAttribute("data",listaHorarios.getContent());
+		
 		model.addAttribute("horarios", listaHorarios);
 		return "horarios/listHorarios";
 	}

@@ -22,4 +22,5 @@ public interface IHorariosService {
 	Page<Horario> buscarTodos(Pageable page);
 	void eliminar(int idHorario);
 	Horario buscarPorId(int idHorario);
+	Page<Horario> buscarTodos(int page, int size);
 }
